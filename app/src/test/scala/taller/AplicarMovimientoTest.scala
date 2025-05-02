@@ -26,6 +26,18 @@ class AplicarMovimientoTest extends AnyFunSuite {
     assert(e2 == (List.fill(7)('c'), Nil, List.fill(3)('c')))
   }
 
+  test("Test 1.3: Movimiento Uno(-2) desde uno a principal (10 vagones)") {
+    val e1 = (List('a', 'b'), List('c', 'd'), Nil)
+    val e2 = objAplicarMovimiento.aplicarMovimiento(e1, objAplicarMovimiento.Uno(-2))
+    assert(e2 == (List('c', 'd', 'a', 'b'), Nil, Nil))
+  }
+
+  test("Test 1.4: Movimiento Dos(0) no tiene efecto (10 vagones)") {
+    val e1 = (List('x', 'y'), Nil, Nil)
+    val e2 = objAplicarMovimiento.aplicarMovimiento(e1, objAplicarMovimiento.Dos(0))
+    assert(e2 == e1)
+  }
+
   // Pruebas pequeñas: tamaño de listas 100 vagones y movimientos
 
   test("Test 2.1: Movimiento Uno(10) desde principal a uno (100 vagones)") {
@@ -41,6 +53,18 @@ class AplicarMovimientoTest extends AnyFunSuite {
     assert(e2 == (List.fill(50)('z'), Nil, List.fill(50)('z')))
   }
 
+  test("Test 2.3: Movimiento Uno(-10) desde uno a principal (100 vagones)") {
+    val e1 = (List.fill(50)('a'), List.fill(50)('b'), Nil)
+    val e2 = objAplicarMovimiento.aplicarMovimiento(e1, objAplicarMovimiento.Uno(-10))
+    assert(e2._1.take(10) == List.fill(10)('b'))
+  }
+
+  test("Test 2.4: Movimiento Dos(-50) desde dos a principal (100 vagones)") {
+    val e1 = (Nil, Nil, List.fill(100)('z'))
+    val e2 = objAplicarMovimiento.aplicarMovimiento(e1, objAplicarMovimiento.Dos(-50))
+    assert(e2._1.size == 50)
+  }
+
   // Pruebas medianas: tamaño de listas 500 vagones y movimientos
 
   test("Test 3.1: Movimiento Uno(100) desde principal a uno (500 vagones)") {
@@ -54,7 +78,6 @@ class AplicarMovimientoTest extends AnyFunSuite {
     val e2 = objAplicarMovimiento.aplicarMovimiento(e1, objAplicarMovimiento.Dos(200))
     assert(e2 == (List.fill(300)('a'), Nil, List.fill(200)('a')))
   }
-
 
   // Pruebas grandes: tamaño de listas 1000 vagones y movimientos
 
