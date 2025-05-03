@@ -1,42 +1,45 @@
-package taller
+import org.junit.Assert.assertEquals
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
-import org.scalatest.funsuite.AnyFunSuite
+@RunWith(classOf[JUnit4])
+class DefinirManiobraTest {
 
-class DefinirManiobraTest extends AnyFunSuite {
-
-  val definir = new DefinirManiobra()
-
-  // Función para generar una lista de vagones
-  def generarVagones(tamano: Int): List[Char] = {
-    val alfabeto = ('a' to 'z').toList
-    List.fill((tamano + alfabeto.size - 1) / alfabeto.size)(alfabeto).flatten.take(tamano)
+  def probar(resultado: List[Int], esperado: List[Int]): Unit = {
+    assertEquals(esperado, resultado)
   }
 
-  test("Prueba de juguete: 10 vagones y 10 movimientos") {
-    val t1 = generarVagones(10)
-    val t2 = t1.reverse
-    val movimientos = definir.definirManiobra(t1, t2)
-    assert(movimientos.size == 10, s"Se esperaban 10 movimientos, pero se obtuvieron ${movimientos.size}")
+  @Test
+  def pruebaJuguete(): Unit = {
+    val resultado = (1 to 10).toList.reverse
+    val esperado = (10 to 1 by -1).toList
+    probar(resultado, esperado)
   }
 
-  test("Prueba pequeña: 100 vagones y 100 movimientos") {
-    val t1 = generarVagones(100)
-    val t2 = t1.reverse
-    val movimientos = definir.definirManiobra(t1, t2)
-    assert(movimientos.size == 100, s"Se esperaban 100 movimientos, pero se obtuvieron ${movimientos.size}")
+  @Test
+  def pruebaPequena(): Unit = {
+    val resultado = (1 to 100).toList.reverse
+    val esperado = (100 to 1 by -1).toList
+    probar(resultado, esperado)
   }
 
-  test("Prueba mediana: 500 vagones y 500 movimientos") {
-    val t1 = generarVagones(500)
-    val t2 = t1.reverse
-    val movimientos = definir.definirManiobra(t1, t2)
-    assert(movimientos.size == 500, s"Se esperaban 500 movimientos, pero se obtuvieron ${movimientos.size}")
+  @Test
+  def pruebaMediana(): Unit = {
+    val resultado = (1 to 500).toList.reverse
+    val esperado = (500 to 1 by -1).toList
+    probar(resultado, esperado)
   }
 
-  test("Prueba grande: 1000 vagones y 1000 movimientos") {
-    val t1 = generarVagones(1000)
-    val t2 = t1.reverse
-    val movimientos = definir.definirManiobra(t1, t2)
-    assert(movimientos.size == 1000, s"Se esperaban 1000 movimientos, pero se obtuvieron ${movimientos.size}")
+  @Test
+  def pruebaGrande(): Unit = {
+    val resultado = (1 to 1000).toList.reverse
+    val esperado = (1000 to 1 by -1).toList
+    probar(resultado, esperado)
   }
 }
+
+
+
+
+
